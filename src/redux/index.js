@@ -7,7 +7,7 @@ import generate from "./generate";
 
 export const fetchRetailerProductList = fetchDataThunk(
   "retailerProductList",
-  "retailerProducts"
+  "get_products/retail"
 );
 
 const persistConfig = {

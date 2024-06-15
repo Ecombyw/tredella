@@ -1,14 +1,22 @@
-"use client"
-import React, { useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Navigation, Autoplay } from 'swiper/modules';
-import Link from 'next/link';
-import { ProductCard } from '@/components/ui/ProductCard';
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Autoplay } from "swiper/modules";
+import Link from "next/link";
+import { ProductCard } from "@/components/ui/ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRetailerProductList } from "@/redux";
 
 const ProductSlider = ({ ProductItem, Heading, className }) => {
+  const dispatch = useDispatch();
+  const retailerProductList = useSelector((state) => state.retailerProductList);
+  useEffect(() => {
+    dispatch(fetchRetailerProductList({}));
+  }, []);
+
   const [swiperRef, setSwiperRef] = useState(null);
 
   // Check if ProductItem exists and has at least one item
@@ -30,6 +38,8 @@ const ProductSlider = ({ ProductItem, Heading, className }) => {
     }
   };
 
+  console.log("=======retailerProductList?.data", retailerProductList?.data);
+
   return (
     <div className="container-lg mt-10 md:mt-20 lg:mt-32 space-y-3">
       <div className="flex justify-between items-center">
@@ -38,7 +48,10 @@ const ProductSlider = ({ ProductItem, Heading, className }) => {
           <hr className={`w-16 ${className} mb-2 md:mb-3 border-4`} />
         </div>
         <div>
-          <Link className="underline font-medium hover:no-underline" href={'/products'}>
+          <Link
+            className="underline font-medium hover:no-underline"
+            href={"/products"}
+          >
             View All
           </Link>
         </div>
@@ -83,7 +96,13 @@ const ProductSlider = ({ ProductItem, Heading, className }) => {
             >
               <ProductCard
                 productdetail={[
-                  { image: array.image, title: array.title, price: array.price, review: array.review, oldPrice: array.oldPrice },
+                  {
+                    image: array.image,
+                    title: array.title,
+                    price: array.price,
+                    review: array.review,
+                    oldPrice: array.oldPrice,
+                  },
                 ]}
               />
             </div>
