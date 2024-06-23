@@ -27,7 +27,7 @@ const MainSlider = ({MainImage}) => {
         {
             MainImage.map((array,index)=>(
             <SwiperSlide key={index}>
-                <Image width={1000} height={1000} className='w-full  md:h-[500px] bg-contain' src={array.image} alt='Image'/>
+                <Image width={1000} height={1000} className='w-full h-full  md:h-[500px] bg-contain' src={array.image} alt='Image'/>
             </SwiperSlide>
             ))
         }
