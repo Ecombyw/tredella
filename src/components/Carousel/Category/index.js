@@ -26,7 +26,7 @@ const createLoopedArray = (arr, count) => {
 
 const loopedBrandimg = createLoopedArray(Brandimg, 4); // Adjust the count based on your needs
 
-function ParallaxText({ children, baseVelocity = 100 }) {
+function ParallaxText({ children, baseVelocity = 300 }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -34,7 +34,7 @@ function ParallaxText({ children, baseVelocity = 100 }) {
     damping: 50,
     stiffness: 400,
   });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4], {
+  const velocityFactor = useTransform(smoothVelocity, [0, 4000], [0, 4], {
     clamp: false,
   });
 
@@ -42,7 +42,7 @@ function ParallaxText({ children, baseVelocity = 100 }) {
 
   const directionFactor = useRef(1);
   useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 5000);
+    let moveBy = directionFactor.current * baseVelocity * (delta / 6000);
 
     if (velocityFactor.get() < 0) {
       directionFactor.current = -1;
@@ -67,8 +67,8 @@ function ParallaxText({ children, baseVelocity = 100 }) {
                 className="py-1 rounded-md w-16 h-16 md:w-24 md:h-24 lg:w-28 lg:h-28 mx-auto"
                 src={array.image}
                 alt={array.image}
-                width={1000}
-                height={1000}
+                width={300}
+                height={300}
               />
               <p className="leading-loose text-sm md:text-lg font-medium">Category</p>
             </div>
@@ -81,7 +81,7 @@ function ParallaxText({ children, baseVelocity = 100 }) {
 
 export default function Category() {
   return (
-    <div className={"mt-16 md:mt-32  space-y-3 container-lg "}>
+    <div className={"mt-16 md:mt-32  space-y-3"}>
       <ParallaxText baseVelocity={-5}>Framer Motion</ParallaxText>
       <ParallaxText baseVelocity={5}>Scroll velocity</ParallaxText>
     </div>

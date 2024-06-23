@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import Container from '../Container/Container'
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import Link from 'next/link';
@@ -62,6 +63,7 @@ const setting = (
 
 
 const Header = () => {
+  const [activeLink, setActiveLink] = useState('');
   return (
     <>
     <div className=' bg-secondary border-b w-full'>
@@ -115,7 +117,7 @@ const Header = () => {
                 <input className='w-full px-4 focus:outline-none active:border-none focus:border-none border-white ' type="text" placeholder='Search Product Here...'/>
                 <Button className='rounded-l-md px-2 md:px-4' title={<IoSearch size={25} />}/>
               </div>
-               <DrawerMenu
+               {/* <DrawerMenu
                width={250}
                 title={<><div className='p-1 rounded-md block lg:hidden text-white bg-primary'>
                 <RiMenuFold3Fill  size={20} />
@@ -127,7 +129,38 @@ const Header = () => {
                 <li><Link className='text-base font-semibold text-black hover:text-black' href={"/"}>Royal View</Link></li>
               </ul>
               </>}
-              />
+              /> */}
+               <div className='w-full mx-auto border-t-2 mt-2 block md:hidden'>
+            <ul className='flex md:hidden justify-evenly items-center gap-4 mt-2'>
+              <li>
+                <Link
+                  className={`text-sm font-medium ${activeLink === 'Retail' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black'}`}
+                  href={"/"}
+                  onClick={() => setActiveLink('Retail')}
+                >
+                  Retail
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`text-sm font-medium ${activeLink === 'products' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black'} `}
+                  href={"/products"}
+                  onClick={() => setActiveLink('products')}
+                >
+                  Wholesale
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`text-sm font-medium ${activeLink === 'cart' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black'} `}
+                  href={"/cart"}
+                  onClick={() => setActiveLink('cart')}
+                >
+                  Royal View
+                </Link>
+              </li>
+            </ul>
+          </div>
               <div className='hidden lg:flex gap-2 md:gap-4 lg:gap-6 '>
               <Popover content={content} title="" trigger="click" placement="bottom">
               <IoMdNotificationsOutline className='text-primary group-hover:text-dark transition duration-200 ease-in' size={30} />
