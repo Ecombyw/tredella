@@ -13,7 +13,7 @@ import Image from 'next/image';
 
 const MainSlider = ({MainImage}) => {
   return (
-    <div className='border-4 p-2 border-gray-100 rounded-md shadow-xl container-lg mx-auto m-2'>
+    <div className=' mt-2'>
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -27,7 +27,7 @@ const MainSlider = ({MainImage}) => {
         {
             MainImage.map((array,index)=>(
             <SwiperSlide key={index}>
-                <Image width={1000} height={1000} className='w-full h-full  md:h-[500px] bg-contain' src={array.image} alt='Image'/>
+                <Image width={500} height={250} className='w-full h-full md:h-[500px] border-4 p-2 border-gray-100 bg-contain' src={array.image} alt='Image'/>
             </SwiperSlide>
             ))
         }

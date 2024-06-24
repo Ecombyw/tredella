@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react'
 import Container from '../Container/Container'
-import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import Link from 'next/link';
 import { IoMailOutline, IoSearch, IoSettingsOutline } from "react-icons/io5";
 import { CiGlobe } from 'react-icons/ci';
@@ -11,7 +10,6 @@ import { IoMdHeartEmpty, IoMdNotificationsOutline } from 'react-icons/io';
 import {  TbCategoryMinus } from 'react-icons/tb';
 import { PiBag } from 'react-icons/pi';
 import { FaRegUser, FaSuitcase } from 'react-icons/fa';
-import { RiMenuFold3Fill } from 'react-icons/ri';
 import { MdOutlineHome } from 'react-icons/md';
 import DrawerMenu from '@/components/ui/DrawerMenu/DrawerMenu';
 import SelectList from '@/components/ui/Select/Select';
@@ -63,7 +61,7 @@ const setting = (
 
 
 const Header = () => {
-  const [activeLink, setActiveLink] = useState('');
+  const [activeLink, setActiveLink] = useState('Retail');
   return (
     <>
     <div className=' bg-secondary border-b w-full'>
@@ -117,24 +115,11 @@ const Header = () => {
                 <input className='w-full px-4 focus:outline-none active:border-none focus:border-none border-white ' type="text" placeholder='Search Product Here...'/>
                 <Button className='rounded-l-md px-2 md:px-4' title={<IoSearch size={25} />}/>
               </div>
-               {/* <DrawerMenu
-               width={250}
-                title={<><div className='p-1 rounded-md block lg:hidden text-white bg-primary'>
-                <RiMenuFold3Fill  size={20} />
-                </div></>}
-              content={<>
-              <ul className='space-y-2'>
-                <li><Link className='text-base font-semibold text-black hover:text-black' href={"/"}>Retail</Link></li>
-                <li><Link className='text-base font-semibold text-black hover:text-black' href={"/"}>Wholesale</Link></li>
-                <li><Link className='text-base font-semibold text-black hover:text-black' href={"/"}>Royal View</Link></li>
-              </ul>
-              </>}
-              /> */}
                <div className='w-full mx-auto border-t-2 mt-2 block md:hidden'>
             <ul className='flex md:hidden justify-evenly items-center gap-4 mt-2'>
               <li>
                 <Link
-                  className={`text-sm font-medium ${activeLink === 'Retail' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black'}`}
+                  className={`text-sm font-medium  ${activeLink === 'Retail' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black border border-primary px-2 py-1 rounded-md'}`}
                   href={"/"}
                   onClick={() => setActiveLink('Retail')}
                 >
@@ -143,7 +128,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  className={`text-sm font-medium ${activeLink === 'products' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black'} `}
+                  className={`text-sm font-medium  ${activeLink === 'products' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black border border-primary px-2 py-1 rounded-md'} `}
                   href={"/products"}
                   onClick={() => setActiveLink('products')}
                 >
@@ -152,7 +137,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  className={`text-sm font-medium ${activeLink === 'cart' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black'} `}
+                  className={`text-sm font-medium  ${activeLink === 'cart' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black border border-primary px-2 py-1 rounded-md'} `}
                   href={"/cart"}
                   onClick={() => setActiveLink('cart')}
                 >
