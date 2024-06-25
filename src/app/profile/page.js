@@ -7,6 +7,7 @@ import t1 from "../../../public/images/t1.jpg"
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { RxCopy } from "react-icons/rx";
 import ProfileTab from '@/components/ui/Tabs/profileTab';
+import ModalView from '@/components/ui/Modal';
 
 const Profile = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -120,15 +121,12 @@ const Profile = () => {
                 <RxCopy onClick={handleCopy} className='cursor-pointer' size={20} />
               </p>
             </div>
-            <p className='font-medium'> <span>Status: </span>Incoming</p>
           </div>
          </div>
          <div className='w-full'>
-         <Modal className={"  p-2 rounded-md text-center hover:bg-dark hover:text-white border border-dark mt-2 "} title={"View Order"} contant={<>asd</>}/>
-         </div>
-        </div>
-        <div className='rounded-md shadow mt-2 p-2 flex flex-wrap  justify-between items-center'>
-         <div className='flex gap-2 w-full'>
+         <ModalView className={"  p-2 rounded-md text-center hover:bg-dark hover:text-white border border-dark mt-2 "} title={"View Order"}
+         content={<div className='mt-10'>
+         <div className='flex gap-2 w-full border-2 rounded-md p-2 mt-2'>
          <div>
             <Image width={150} height={150} className='bg-contain rounded-md' src={t1} alt='order'/>
           </div>
@@ -149,15 +147,38 @@ const Profile = () => {
             <p className='font-medium'> <span>Status: </span>Incoming</p>
           </div>
          </div>
-         <div className='w-full'>
-         <Modal className={"  p-2 rounded-md text-center hover:bg-dark hover:text-white border border-dark mt-2 "} title={"View Order"} contant={<>asd</>}/>
+         <div className='flex gap-2 w-full border-2 rounded-md p-2 mt-2'>
+         <div>
+            <Image width={150} height={150} className='bg-contain rounded-md' src={t1} alt='order'/>
+          </div>
+          <div>
+            <p className='font-semibold'> <span>Order ID: #</span>165416516554 </p>
+            <p className='font-medium'> <span>Date: </span>10/4/2024</p>
+            <div>
+              {showAlert && (
+                <div className="alert alert-success text-xs" role="alert">
+                  Tracking ID copied to clipboard
+                </div>
+              )}
+              <p className='font-medium flex gap-2 items-center' >
+                <span>Tracking ID: </span>DHA72512831
+                <RxCopy onClick={handleCopy} className='cursor-pointer' size={20} />
+              </p>
+            </div>
+            <p className='font-medium'> <span>Status: </span>Incoming</p>
+          </div>
+         </div>
+         </div>}
+         />
          </div>
         </div>
+      
         </div>
        
       </>
       },
       {label: "Reset Password", content:<>
+
       <div className='container-sm'>
            <form className='max-w-screen-sm space-y-3'>
             <div>
