@@ -7,7 +7,6 @@ import ProductSlider from "@/components/Carousel/ProductSlider";
 import Category from "@/components/Carousel/Category";
 import TabsData from "@/components/widgets/TabsData";
 import Tabs from "@/components/ui/Tabs/Tabs";
-import ModalView from "@/components/ui/Modal";
 
 export default function Home() {
   const tabs = [

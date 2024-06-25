@@ -119,7 +119,7 @@ const Header = () => {
             <ul className='flex md:hidden justify-evenly items-center gap-4 mt-2'>
               <li>
                 <Link
-                  className={`text-sm font-medium  ${activeLink === 'Retail' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black border border-primary px-2 py-1 rounded-md'}`}
+                  className={`text-sm font-medium  ${activeLink === 'Retail' ? 'bg-primary p-2 rounded-md text-white' : 'text-black border border-primary p-2 rounded-md'}`}
                   href={"/"}
                   onClick={() => setActiveLink('Retail')}
                 >
@@ -128,7 +128,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  className={`text-sm font-medium  ${activeLink === 'products' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black border border-primary px-2 py-1 rounded-md'} `}
+                  className={`text-sm font-medium  ${activeLink === 'products' ? 'bg-primary p-2 rounded-md text-white' : 'text-black border border-primary p-2 rounded-md'} `}
                   href={"/products"}
                   onClick={() => setActiveLink('products')}
                 >
@@ -137,7 +137,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  className={`text-sm font-medium  ${activeLink === 'cart' ? 'bg-primary px-2 py-1 rounded-md text-white' : 'text-black border border-primary px-2 py-1 rounded-md'} `}
+                  className={`text-sm font-medium  ${activeLink === 'cart' ? 'bg-primary p-2 rounded-md text-white' : 'text-black border border-primary p-2 rounded-md'} `}
                   href={"/cart"}
                   onClick={() => setActiveLink('cart')}
                 >
@@ -170,10 +170,10 @@ const Header = () => {
       </Container>
     </div>
     <div className='bg-primary py-4 hidden lg:block '>
-        <ul className='flex justify-center gap-12 text-white'>
-          <li><Link className='hover:underline' href={"/"}>Retail</Link></li>
-          <li><Link className='hover:underline' href={"/"}>Wholesale</Link></li>
-          <li><Link className='hover:underline' href={"/"}>Royal View</Link></li>
+        <ul className='flex justify-center gap-12 '>
+          <li><Link className=' bg-secondary p-2 rounded-md ' href={"/"}>Retail</Link></li>
+          <li><Link className='text-white' href={"/"}>Wholesale</Link></li>
+          <li><Link className='text-white' href={"/"}>Royal View</Link></li>
         </ul>
         
       </div>

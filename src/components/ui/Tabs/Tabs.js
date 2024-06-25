@@ -7,7 +7,7 @@ const Tabs = ({ tabs,className ,containerName}) => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <Container className={`mt-10 ${containerName}`}>
+    <Container className={`mt-28 ${containerName}`}>
       <div className={`flex space-x-2 items-center ${className}`}>
         {tabs.map((tab, index) => (
           <button
