@@ -6,58 +6,11 @@ import t3 from "../../public/images/t3.jpg";
 import Container from "@/components/Layout/Container/Container";
 import ProductSlider from "@/components/Carousel/ProductSlider";
 import Category from "@/components/Carousel/Category";
-
 import { useState } from "react";
-import { ProductCard } from "@/components/ui/ProductCard";
 
 export default function Home() {
   const [tabValue, setTabValue] = useState("retail");
-  const renderAllProducts = () => {
-    const productData = [
-      {
-        image: t1,
-        title: "Urban Shoes Good",
-        review: "12",
-        price: "100",
-        oldPrice: "200",
-      },
-      {
-        image: t1,
-        title: "Urban Shoes Good",
-        review: "12",
-        price: "100",
-        oldPrice: "200",
-      },
-      {
-        image: t1,
-        title: "Urban Shoes Good",
-        review: "12",
-        price: "100",
-        oldPrice: "200",
-      },
-      {
-        image: t1,
-        title: "Urban Shoes Good",
-        review: "12",
-        price: "100",
-        oldPrice: "200",
-      },
-      {
-        image: t1,
-        title: "Urban Shoes Good",
-        review: "12",
-        price: "100",
-        oldPrice: "200",
-      },
-    ];
-    return productData?.map((item) => {
-      return (
-        <div className="md:w-[270px]">
-          <ProductCard productdetail={item} />
-        </div>
-      );
-    });
-  };
+
   return (
     <>
       <div className="bg-primary py-4 hidden lg:block ">
