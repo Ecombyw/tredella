@@ -94,17 +94,7 @@ const ProductSlider = ({ ProductItem, Heading, className }) => {
               onMouseEnter={pauseAutoplay} // Pause autoplay on mouse enter
               onMouseLeave={resumeAutoplay} // Resume autoplay on mouse leave
             >
-              <ProductCard
-                productdetail={[
-                  {
-                    image: array.image,
-                    title: array.title,
-                    price: array.price,
-                    review: array.review,
-                    oldPrice: array.oldPrice,
-                  },
-                ]}
-              />
+              <ProductCard productdetail={array} />
             </div>
           </SwiperSlide>
         ))}
