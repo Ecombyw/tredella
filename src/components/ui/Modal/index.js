@@ -23,9 +23,9 @@ const ModalView = ({title,className,content}) => {
         <div className={`cursor-pointer ${className}`} onClick={showModal}>
         {title}
         </div>
-      <Modal width={1000} title="" footer="" open={isModalOpen}  onCancel={handleCancel}>
-        {content}
-      </Modal>
+          <Modal width={1000} title="" footer="" open={isModalOpen}  onCancel={handleCancel}>
+            {content}
+          </Modal>
         </>
     );
 };
