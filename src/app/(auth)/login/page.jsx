@@ -17,8 +17,10 @@ const Page = () => {
           />
         </div>
         <div className="my-3">
-          <h2 className='font-semibold text-center text-[24px]'>Welcome Back!</h2>
-          <p className='text-center'>Enter your email and password</p>
+          <h2 className="font-semibold text-center text-[24px]">
+            Welcome Back!
+          </h2>
+          <p className="text-center">Enter your email and password</p>
         </div>
         <Form layout="vertical">
           <Form.Item

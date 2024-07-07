@@ -103,7 +103,7 @@ const CategoryDrawer = ({ drawerOpen, setDrawerOpen }) => {
     const renderChildCategory = (childCategory) => {
       return childCategory?.map((item, index) => {
         return (
-          <div className="w-[100px] mb-2">
+          <div key={index}  className="w-[100px] mb-2">
             <Image
               src={imageUrl}
               alt=""
@@ -116,7 +116,7 @@ const CategoryDrawer = ({ drawerOpen, setDrawerOpen }) => {
     };
     return subCategory?.map((item, index) => {
       return (
-        <div className=" overflow-x-auto">
+        <div key={index} className=" overflow-x-auto">
           <p className="mb-3">{item?.name}</p>
           <div className="flex items-center gap-4">
             {renderChildCategory(item?.childCategory)}
