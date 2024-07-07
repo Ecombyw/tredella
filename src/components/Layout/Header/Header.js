@@ -100,9 +100,15 @@ const Header = () => {
             <div className="flex gap-4 items-center mx-auto md:mx-0 ">
               <div className="flex gap-2 items-center text-sm md:text-base lg:text-lg ">
                 <CiGlobe size={20} className="text-primary" />
-                <Link className="text-sm md:text-base" href={"/login"}>
-                  Login/Register
-                </Link>
+                <div className='flex items-center'>
+                  <Link className="text-sm md:text-base cursor-pointer" href={"/login"}>
+                    Login
+                  </Link>
+                  {" "}/{" "}
+                  <Link className="text-sm md:text-base cursor-pointer" href={"/register"}>
+                    Register
+                  </Link>
+                </div>
               </div>
               <div className="flex items-center gap-1 text-xs md:text-base lg:text-lg  hover:underline">
                 <FaSuitcase size={20} className="text-primary" />
@@ -166,7 +172,12 @@ const Header = () => {
                 </>
               }
             />
-            <div onClick={() => setDrawerOpen(true)} className="px-3 h-[43px] flex items-center justify-center bg-white border mr-[-10px] cursor-pointer">Categories</div>
+            <div
+              onClick={() => setDrawerOpen(true)}
+              className="px-3 h-[43px] flex items-center justify-center bg-white border mr-[-10px] cursor-pointer"
+            >
+              Categories
+            </div>
             <div className="border w-3/6 lg:w-full max-w-screen-md flex">
               <input
                 className="w-full px-4 focus:outline-none active:border-none focus:border-none border-white "

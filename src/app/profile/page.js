@@ -1,16 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import Modal from "@/components/ui/Modal";
-import { PiDotsNineBold } from "react-icons/pi";
 import Image from "next/image";
 import t1 from "../../../public/images/t1.jpg";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { RxCopy } from "react-icons/rx";
 import ProfileTab from "@/components/ui/Tabs/profileTab";
 import ModalView from "@/components/ui/Modal";
+import EditProfileModal from "@/components/Modals/EditProfile";
+import { Button, Tabs, Tag } from "antd";
 
 const Profile = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -55,6 +57,55 @@ const Profile = () => {
     setTimeout(() => {
       setShowAlert(false);
     }, 3000);
+  };
+
+  const renderChildTab = () => {
+    return (
+      <div className="max-h-[500px] overflow-y-scroll">
+        <div className="rounded-md shadow mt-2 p-2 flex flex-wrap  justify-between items-center">
+          <div className="flex gap-2 w-full">
+            <div>
+              <Image
+                width={150}
+                height={150}
+                className="bg-contain rounded-md"
+                src={t1}
+                alt="order"
+              />
+            </div>
+            <div>
+              <p className="font-semibold">
+                {" "}
+                <span>Order ID: #</span>165416516554{" "}
+              </p>
+              <p className="font-medium">
+                {" "}
+                <span>Date: </span>10/4/2024
+              </p>
+              <div>
+                {showAlert && (
+                  <div className="alert alert-success text-xs" role="alert">
+                    Tracking ID copied to clipboard
+                  </div>
+                )}
+                <p className="font-medium flex gap-2 items-center">
+                  <span>Tracking ID: </span>DHA72512831
+                  <RxCopy
+                    onClick={handleCopy}
+                    className="cursor-pointer"
+                    size={20}
+                  />
+                </p>
+                <p className="font-medium flex gap-2 items-center mt-1">
+                  <span>Status: </span>
+                  <Tag color="green">Approved</Tag>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -104,11 +155,17 @@ const Profile = () => {
                       </h3>
                       <p className="text-sm">Ahmad</p>
                     </div>
-                    <Modal
-                      className={"bg-primary p-2 rounded-md text-white mt-5"}
-                      title={"Edit Profile"}
-                      content={<>Address</>}
-                    />
+                    <div className="pt-5">
+                      <Button
+                        type="primary"
+                        className="w-[150px]"
+                        onClick={() => {
+                          setShowModal(true);
+                        }}
+                      >
+                        Edit Profile
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </>
@@ -118,147 +175,52 @@ const Profile = () => {
             label: "View Order",
             content: (
               <>
-                <div className="max-h-[500px] overflow-y-scroll">
-                  <div className="rounded-md shadow mt-2 p-2 flex flex-wrap  justify-between items-center">
-                    <div className="flex gap-2 w-full">
-                      <div>
-                        <Image
-                          width={150}
-                          height={150}
-                          className="bg-contain rounded-md"
-                          src={t1}
-                          alt="order"
-                        />
-                      </div>
-                      <div>
-                        <p className="font-semibold">
-                          {" "}
-                          <span>Order ID: #</span>165416516554{" "}
-                        </p>
-                        <p className="font-medium">
-                          {" "}
-                          <span>Date: </span>10/4/2024
-                        </p>
-                        <div>
-                          {showAlert && (
-                            <div
-                              className="alert alert-success text-xs"
-                              role="alert"
-                            >
-                              Tracking ID copied to clipboard
-                            </div>
-                          )}
-                          <p className="font-medium flex gap-2 items-center">
-                            <span>Tracking ID: </span>DHA72512831
-                            <RxCopy
-                              onClick={handleCopy}
-                              className="cursor-pointer"
-                              size={20}
-                            />
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="w-full">
-                      <ModalView
-                        className={
-                          "  p-2 rounded-md text-center hover:bg-dark hover:text-white border border-dark mt-2 "
-                        }
-                        title={"View Order"}
-                        content={
-                          <div className="mt-10">
-                            <div className="flex gap-2 w-full border-2 rounded-md p-2 mt-2">
-                              <div>
-                                <Image
-                                  width={150}
-                                  height={150}
-                                  className="bg-contain rounded-md"
-                                  src={t1}
-                                  alt="order"
-                                />
-                              </div>
-                              <div>
-                                <p className="font-semibold">
-                                  {" "}
-                                  <span>Order ID: #</span>165416516554{" "}
-                                </p>
-                                <p className="font-medium">
-                                  {" "}
-                                  <span>Date: </span>10/4/2024
-                                </p>
-                                <div>
-                                  {showAlert && (
-                                    <div
-                                      className="alert alert-success text-xs"
-                                      role="alert"
-                                    >
-                                      Tracking ID copied to clipboard
-                                    </div>
-                                  )}
-                                  <p className="font-medium flex gap-2 items-center">
-                                    <span>Tracking ID: </span>DHA72512831
-                                    <RxCopy
-                                      onClick={handleCopy}
-                                      className="cursor-pointer"
-                                      size={20}
-                                    />
-                                  </p>
-                                </div>
-                                <p className="font-medium">
-                                  {" "}
-                                  <span>Status: </span>Incoming
-                                </p>
-                              </div>
-                            </div>
-                            <div className="flex gap-2 w-full border-2 rounded-md p-2 mt-2">
-                              <div>
-                                <Image
-                                  width={150}
-                                  height={150}
-                                  className="bg-contain rounded-md"
-                                  src={t1}
-                                  alt="order"
-                                />
-                              </div>
-                              <div>
-                                <p className="font-semibold">
-                                  {" "}
-                                  <span>Order ID: #</span>165416516554{" "}
-                                </p>
-                                <p className="font-medium">
-                                  {" "}
-                                  <span>Date: </span>10/4/2024
-                                </p>
-                                <div>
-                                  {showAlert && (
-                                    <div
-                                      className="alert alert-success text-xs"
-                                      role="alert"
-                                    >
-                                      Tracking ID copied to clipboard
-                                    </div>
-                                  )}
-                                  <p className="font-medium flex gap-2 items-center">
-                                    <span>Tracking ID: </span>DHA72512831
-                                    <RxCopy
-                                      onClick={handleCopy}
-                                      className="cursor-pointer"
-                                      size={20}
-                                    />
-                                  </p>
-                                </div>
-                                <p className="font-medium">
-                                  {" "}
-                                  <span>Status: </span>Incoming
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
+                <Tabs
+                  items={[
+                    {
+                      label: "All",
+                      children: renderChildTab(),
+                      key: "1",
+                      tabKey: "1",
+                    },
+                    {
+                      label: "Approved",
+                      children: renderChildTab(),
+                      key: "2",
+                      tabKey: "2",
+                    },
+                    {
+                      label: "Canceled",
+                      children: renderChildTab(),
+                      key: "3",
+                      tabKey: "3",
+                    },
+                    {
+                      label: "Ship",
+                      children: renderChildTab(),
+                      key: "4",
+                      tabKey: "4",
+                    },
+                    {
+                      label: "Deliver",
+                      children: renderChildTab(),
+                      key: "5",
+                      tabKey: "5",
+                    },
+                    {
+                      label: "Resived",
+                      children: renderChildTab(),
+                      key: "6",
+                      tabKey: "6",
+                    },
+                    {
+                      label: "Return",
+                      children: renderChildTab(),
+                      key: "7",
+                      tabKey: "7",
+                    },
+                  ]}
+                ></Tabs>
               </>
             ),
           },
@@ -361,6 +323,7 @@ const Profile = () => {
           { label: "Logout" },
         ]}
       />
+      <EditProfileModal setShowModal={setShowModal} showModal={showModal} />
     </>
   );
 };
