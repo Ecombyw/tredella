@@ -86,9 +86,10 @@ const CategoryDrawer = ({ drawerOpen, setDrawerOpen }) => {
   ];
 
   const renderCategories = () => {
-    return category?.map((item) => {
+    return category?.map((item ,index) => {
       return (
         <div
+        key={index}
           onClick={() => setShowCategory(false)}
           className="flex items-center justify-between py-2 hover:bg-zinc-200 cursor-pointer px-2 rounded"
         >

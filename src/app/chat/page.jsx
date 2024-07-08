@@ -88,7 +88,7 @@ const Page = () => {
               <div className="flex gap-2 ml-auto justify-end mt-2">
                 <div className="bg-zinc-400 text-white px-2 w-fit text-xs py-1 rounded-l-lg rounded-tr-lg max-w-[300px]">
                   Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
+                  typesetting industry. Lorem Ipsum has been the industry`&apos;`s
                   standard dummy text ever since the 1500s
                 </div>
                 <div className="bg-primary w-[25px] h-[25px] rounded-full text-white text-lg flex items-center justify-center">
