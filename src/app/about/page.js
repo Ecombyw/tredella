@@ -20,7 +20,7 @@ const About = () => {
       <div className='grid grid-cols-1 sm:grid-cols-2 items-center p-2 gap-10'>
         <div className=' space-y-4 p-2 sm:p-3 md:p-6 lg:p-14'>
           <h1 className="text-lg lg:text-2xl font-semibold">Customers Love Our Creative Team, and So Will You</h1>
-          <p className="text-base md:text-lg">Highly recommend Iori ! They guide us on marketing initiatives and develop great strategies to increase our return on investment. The agency is excellent at being cooperative and responding quickly.</p>
+          <p className="text-base font-normal md:text-lg">Highly recommend Iori ! They guide us on marketing initiatives and develop great strategies to increase our return on investment. The agency is excellent at being cooperative and responding quickly.</p>
         </div>
         <div>
         <div className='grid grid-cols-3 gap-5 '>

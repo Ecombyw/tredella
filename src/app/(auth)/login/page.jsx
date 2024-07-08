@@ -20,7 +20,7 @@ const Page = () => {
           <h2 className="font-semibold text-center text-[24px]">
             Welcome Back!
           </h2>
-          <p className="text-center">Enter your email and password</p>
+          <p className="text-center font-normal">Enter your email and password</p>
         </div>
         <Form layout="vertical">
           <Form.Item

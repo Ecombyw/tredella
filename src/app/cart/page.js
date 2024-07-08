@@ -164,13 +164,13 @@ const Cart = () => {
                                 alt="cart image"
                               />
                               <div className="space-y-2">
-                                <p className="text-lg hover:underline transition duration-200">
+                                <p className="text-lg hover:underline transition duration-200 font-normal">
                                   ARTIST TRAVEL BOTTLE (OUTDOORS)
                                 </p>
-                                <p className="text-lg">
+                                <p className="text-lg font-normal">
                                   <span>AED </span> {pricePerItem.toFixed(2)}
                                 </p>
-                                <p className="text-lg">
+                                <p className="text-lg font-normal">
                                   <span>Color: </span>DEEP PINK
                                 </p>
                               </div>
@@ -203,7 +203,7 @@ const Cart = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm">
-                            <p className="text-lg">
+                            <p className="text-lg font-normal">
                               <span>AED </span> {totalPrice(index)}
                             </p>
                           </td>
@@ -222,16 +222,16 @@ const Cart = () => {
                                 alt="cart image"
                               />
                               <div >
-                                <p className="text-lg hover:underline transition duration-200">
+                                <p className="text-lg hover:underline transition duration-200 font-normal">
                                   ARTIST TRAVEL BOTTLE (OUTDOORS)
                                 </p>
-                                <p className="text-lg">
+                                <p className="text-lg font-normal">
                                   <span>Price Per Product: </span> <span>AED {pricePerItem.toFixed(2)}</span>
                                 </p>
-                                <p className="text-lg">
+                                <p className="text-lg font-normal">
                                   <span>Pisces: </span>2
                                 </p>
-                                <p className="text-lg">
+                                <p className="text-lg font-normal">
                                   <span>Color: </span>DEEP PINK
                                 </p>
                               </div>
@@ -264,7 +264,7 @@ const Cart = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm">
-                            <p className="text-lg">
+                            <p className="text-lg font-normal">
                               <span>AED </span> {totalPrice(index)}
                             </p>
                           </td>
@@ -278,8 +278,8 @@ const Cart = () => {
 
           <div className="text-end border-t-2 mt-10 pt-5 space-y-3">
             <div className="flex gap-5 justify-end items-center">
-              <p className="text-base">Subtotal</p>
-              <p className="text-base">
+              <p className="text-base font-normal">Subtotal</p>
+              <p className="text-base font-normal">
                 <span>AED </span>
                 {subtotal.toFixed(2)}
               </p>
