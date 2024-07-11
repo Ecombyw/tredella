@@ -18,6 +18,7 @@ import { Popover } from "antd";
 import img from "../../../../public/images/t3.jpg";
 import ModalView from "@/components/ui/Modal";
 import CategoryDrawer from "@/components/CategoryDrawer";
+import GoogleTranslate from "@/components/GoogleTranslate";
 
 const content = (
   <>
@@ -94,18 +95,25 @@ const Header = () => {
   const [openDrawer, setDrawerOpen] = useState(false);
   return (
     <>
-      <div className=" bg-secondary border-b w-full">
+      <div className=" bg-secondary border-b w-full mt-[-36px]">
         <Container>
           <div className="flex justify-end flex-wrap lg:flex-nowrap gap-2 p-2 items-center">
             <div className="flex gap-4 items-center mx-auto md:mx-0 ">
               <div className="flex gap-2 items-center text-sm md:text-base lg:text-lg ">
                 <CiGlobe size={20} className="text-primary" />
-                <div className='flex items-center'>
-                  <Link className="text-sm md:text-base cursor-pointer" href={"/login"}>
+                <div className="flex items-center">
+                  <GoogleTranslate />
+                  <Link
+                    className="text-sm md:text-base cursor-pointer"
+                    href={"/login"}
+                  >
                     Login
-                  </Link>
-                  {" "}/{" "}
-                  <Link className="text-sm md:text-base cursor-pointer" href={"/register"}>
+                  </Link>{" "}
+                  /{" "}
+                  <Link
+                    className="text-sm md:text-base cursor-pointer"
+                    href={"/register"}
+                  >
                     Register
                   </Link>
                 </div>

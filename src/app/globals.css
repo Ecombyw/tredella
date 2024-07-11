@@ -1,53 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.borderless-select.ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
-    border: none !important;
+.borderless-select.ant-select-outlined:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border: none !important;
 }
-.transparent-select.ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
-    background: transparent !important;
+.transparent-select.ant-select-outlined:not(.ant-select-customize-input)
+  .ant-select-selector {
+  background: transparent !important;
 }
 
 .parallax {
-    overflow: hidden;
-    margin: 0;
-    white-space: nowrap;
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  
-  .parallax .scroller {
-    white-space: nowrap;
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  
-  .parallax span {
-    display: block;
-    margin-right: 10px;
-  }
-  
-  .floating-label-input:focus ~ .floating-label,
-  .floating-label-input:not(:placeholder-shown) ~ .floating-label {
-    transform: scale(0.70) translateY(-1.2rem);
-    opacity: 1;
-  }
-  .floating-label {
-    transition: transform 0.2s, opacity 0.2s;
-    transform-origin: top left;
-  }
+  overflow: hidden;
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
 
-  .floating-label-select:focus ~ .floating-label,
-  .floating-label-select:not([value=""]) ~ .floating-label {
-    transform: scale(0.75) translateY(-1.5rem);
-    opacity: 1;
-  }
+.parallax .scroller {
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
 
+.parallax span {
+  display: block;
+  margin-right: 10px;
+}
+
+.floating-label-input:focus ~ .floating-label,
+.floating-label-input:not(:placeholder-shown) ~ .floating-label {
+  transform: scale(0.7) translateY(-1.2rem);
+  opacity: 1;
+}
+.floating-label {
+  transition: transform 0.2s, opacity 0.2s;
+  transform-origin: top left;
+}
+
+.floating-label-select:focus ~ .floating-label,
+.floating-label-select:not([value=""]) ~ .floating-label {
+  transform: scale(0.75) translateY(-1.5rem);
+  opacity: 1;
+}
+
+.ant-popover .ant-popover-inner {
+  width: 400px !important;
+}
+@media screen and (max-width: 480px) {
   .ant-popover .ant-popover-inner {
-    width: 400px !important;
+    width: 250px !important;
   }
-  @media screen and (max-width: 480px) {
-    .ant-popover .ant-popover-inner {
-      width: 250px !important;
-    }
-  }
+}
+
+.VIpgJd-ZVi9od-ORHb {
+  height: 0px !important;
+  overflow: hidden;
+}
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+  height: 0px !important;
+  overflow: hidden;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
