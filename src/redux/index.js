@@ -13,14 +13,18 @@ export const fetchRetailerProductList = fetchDataThunk(
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["token", "userInfo"],
+  whitelist: ["token", "userInfo", "checkLanguage"],
 };
 
 const rootReducer = combineReducers({
   userInfo: generateReducer("userInfo").reducer,
   token: generateReducer("token").reducer,
+  checkLanguage: generateReducer("checkLanguage").reducer,
   // ============= CURDS APIS =============== //
-  retailerProductList: generate("retailerProductList", fetchRetailerProductList),
+  retailerProductList: generate(
+    "retailerProductList",
+    fetchRetailerProductList
+  ),
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -19,6 +19,7 @@ import img from "../../../../public/images/t3.jpg";
 import ModalView from "@/components/ui/Modal";
 import CategoryDrawer from "@/components/CategoryDrawer";
 import GoogleTranslate from "@/components/GoogleTranslate";
+import { useSelector } from "react-redux";
 
 const content = (
   <>
@@ -93,9 +94,16 @@ const setting = (
 
 const Header = () => {
   const [openDrawer, setDrawerOpen] = useState(false);
+  const checkLanguage = useSelector((state) => state.checkLanguage);
+
+  console.log("=== checkLanguage?.data== ", checkLanguage?.data);
   return (
     <>
-      <div className=" bg-secondary border-b w-full mt-[-36px]">
+      <div
+        className={`bg-secondary border-b w-full ${
+          checkLanguage?.data ? "mt-[-36px]" : ""
+        }`}
+      >
         <Container>
           <div className="flex justify-between flex-wrap lg:flex-nowrap gap-2 p-2 items-center">
             <GoogleTranslate />

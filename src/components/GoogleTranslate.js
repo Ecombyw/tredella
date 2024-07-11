@@ -1,8 +1,11 @@
+import { getReducer } from "@/redux/reducer";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const GoogleTranslate = () => {
+  const dispatch = useDispatch();
   const [selectedLanguage, setSelectedLanguage] = useState("Select Language");
-
+  const serCheckLanguage = getReducer("checkLanguage");
   useEffect(() => {
     const addGoogleTranslateScript = () => {
       const script = document.createElement("script");
@@ -43,12 +46,24 @@ const GoogleTranslate = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    console.log("===== call ===", selectedLanguage);
+    if (selectedLanguage === "Select Language") {
+      dispatch(serCheckLanguage(false));
+    } else {
+      dispatch(serCheckLanguage(true));
+    }
+  }, [selectedLanguage?.length]);
+
   return (
     <div className={`relative ${selectedLanguage ? "mt-0" : "mt-[36px]"}`}>
       <div id="google_translate_element"></div>
-      <div className=" absolute  w-[170px] top-1.5 left-2">
-        {selectedLanguage ? selectedLanguage : "Change language"}
-      </div>
+      <span
+        id="google_translate_element"
+        className="absolute w-fit  top-1.5 left-2"
+      >
+        {selectedLanguage}
+      </span>
     </div>
   );
 };
