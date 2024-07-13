@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -7,16 +7,8 @@ import "swiper/css/pagination";
 import { Navigation, Autoplay } from "swiper/modules";
 import Link from "next/link";
 import { ProductCard } from "@/components/ui/ProductCard";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchRetailerProductList } from "@/redux";
 
 const ProductSlider = ({ ProductItem, Heading, className }) => {
-  const dispatch = useDispatch();
-  const retailerProductList = useSelector((state) => state.retailerProductList);
-  useEffect(() => {
-    dispatch(fetchRetailerProductList({}));
-  }, []);
-
   const [swiperRef, setSwiperRef] = useState(null);
 
   // Check if ProductItem exists and has at least one item
@@ -37,8 +29,6 @@ const ProductSlider = ({ ProductItem, Heading, className }) => {
       swiperRef.autoplay.start();
     }
   };
-
-  console.log("=======retailerProductList?.data", retailerProductList?.data);
 
   return (
     <div className="container-lg mt-10 md:mt-20 lg:mt-32 space-y-3">

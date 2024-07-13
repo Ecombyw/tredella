@@ -1,10 +1,11 @@
 "use client";
-
-import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { CardBody, CardContainer, CardItem } from "./3d-card";
-export function ProductCard({ totalStars = 5, productdetail }) {
+import { Rate } from "antd";
+import Image from "next/image";
+export function ProductCard({ productdetail }) {
+  console.log("=======productdetail", JSON.stringify(productdetail));
   return (
     <>
       <CardContainer containerClassName={"py-2"} className="inter-var">
@@ -12,29 +13,40 @@ export function ProductCard({ totalStars = 5, productdetail }) {
           <CardItem translateZ="100" className="w-full ">
             <Link href={"/detail"}>
               <div className="relative">
-                <Image
-                  src={productdetail?.image}
-                  height="1000"
-                  width="1000"
-                  className="h-full w-full object-cover rounded-xl group-hover/card:shadow-xl"
-                  alt="thumbnail"
-                />
+                {productdetail?.main_image ? (
+                  <img
+                    src={
+                      productdetail?.main_image
+                        ? `https://www.api.tredella.com/public/${productdetail?.main_image}`
+                        : require("../../../../public/images/no_image.png")
+                    }
+                    height="1000"
+                    width="1000"
+                    className="h-full w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                    alt="thumbnail"
+                  />
+                ) : (
+                  <Image
+                    src={require("../../../../public/images/no_image.png")}
+                    height="1000"
+                    width="1000"
+                    className="h-full w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                    alt="thumbnail"
+                  />
+                )}
               </div>
               <div className="px-2">
                 <h1 className="text-sm md:text-lg font-medium md:font-semibold">
-                  {productdetail?.title}
+                  {productdetail?.product_name || "No Title"}
                 </h1>
                 <div className="flex items-center">
-                  {[...Array(totalStars)].map((_, index) => (
-                    <span
-                      key={index}
-                      className={"star filled md:text-lg text-yellow-500"}
-                    >
-                      &#9733;
-                    </span>
-                  ))}
+                  <Rate
+                    defaultValue={productdetail?.total_reviews}
+                    disabled
+                    style={{ fontSize: 18 }}
+                  />
                   <h1 className="pt-1 px-2">
-                    (<span>{productdetail?.review}</span>)
+                    (<span>{productdetail?.total_reviews || 0}</span>)
                   </h1>
                 </div>
                 <div className="flex flex-wrap md:flex-nowrap gap-2 ">

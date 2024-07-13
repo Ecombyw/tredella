@@ -1,11 +1,16 @@
-import { getReducer } from "@/redux/reducer";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Select } from "antd";
+import { getReducer } from "@/redux/reducer";
+import './GoogleTranslate.css'; // Import the CSS file
+
+const { Option } = Select;
 
 const GoogleTranslate = () => {
   const dispatch = useDispatch();
   const [selectedLanguage, setSelectedLanguage] = useState("Select Language");
   const serCheckLanguage = getReducer("checkLanguage");
+
   useEffect(() => {
     const addGoogleTranslateScript = () => {
       const script = document.createElement("script");
@@ -17,10 +22,12 @@ const GoogleTranslate = () => {
     };
 
     const initGoogleTranslate = () => {
-      new window.google.translate.TranslateElement(
-        { pageLanguage: "en" },
-        "google_translate_element"
-      );
+      if (window.google && window.google.translate) {
+        new window.google.translate.TranslateElement(
+          { pageLanguage: "en" },
+          "google_translate_element"
+        );
+      }
     };
 
     window.googleTranslateElementInit = initGoogleTranslate;
@@ -30,10 +37,12 @@ const GoogleTranslate = () => {
     const observer = new MutationObserver(() => {
       const selectElement = document.querySelector(".goog-te-combo");
       if (selectElement) {
+        // Hide the original Google Translate selector
+        selectElement.style.display = "none";
+
         // Set event listener to show selected value
         selectElement.addEventListener("change", () => {
-          const selectedValue =
-            selectElement.options[selectElement.selectedIndex].text;
+          const selectedValue = selectElement.options[selectElement.selectedIndex].text;
           setSelectedLanguage(selectedValue);
         });
 
@@ -55,15 +64,32 @@ const GoogleTranslate = () => {
     }
   }, [selectedLanguage?.length]);
 
+  const handleChange = (value) => {
+    const selectElement = document.querySelector(".goog-te-combo");
+    if (selectElement) {
+      selectElement.value = value;
+      const event = new Event("change");
+      selectElement.dispatchEvent(event);
+    }
+  };
+
   return (
     <div className={`relative ${selectedLanguage ? "mt-0" : "mt-[36px]"}`}>
-      <div id="google_translate_element"></div>
-      <span
-        id="google_translate_element"
-        className="absolute w-fit  top-1.5 left-2"
+      <div id="google_translate_element" style={{ display: "none" }}></div>
+      <Select
+        defaultValue="Select Language"
+        style={{ width: 200 }}
+        onChange={handleChange}
+        className="notranslate" // Add a class to the Select component
+        translate="no" // Add translate attribute to prevent translation
       >
-        {selectedLanguage}
-      </span>
+        <Option value="en" className="notranslate" translate="no">English</Option>
+        <Option value="es" className="notranslate" translate="no">Spanish</Option>
+        <Option value="fr" className="notranslate" translate="no">French</Option>
+        <Option value="de" className="notranslate" translate="no">German</Option>
+        {/* Add more languages as needed */}
+      </Select>
+ 
     </div>
   );
 };

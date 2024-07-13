@@ -6,11 +6,17 @@ import t3 from "../../public/images/t3.jpg";
 import Container from "@/components/Layout/Container/Container";
 import ProductSlider from "@/components/Carousel/ProductSlider";
 import Category from "@/components/Carousel/Category";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRetailerProductList } from "@/redux";
 
 export default function Home() {
   const [tabValue, setTabValue] = useState("retail");
-
+  const dispatch = useDispatch();
+  const retailerProductList = useSelector((state) => state.retailerProductList);
+  useEffect(() => {
+    dispatch(fetchRetailerProductList({}));
+  }, []);
   return (
     <>
       <div className="bg-primary py-4 hidden lg:block ">
@@ -136,43 +142,7 @@ export default function Home() {
         {(tabValue === "retail" || tabValue === "wholeSale") && (
           <ProductSlider
             Heading={"All Products"}
-            ProductItem={[
-              {
-                image: t1,
-                title: "Urban Shoes Good",
-                review: "12",
-                price: "100",
-                oldPrice: "200",
-              },
-              {
-                image: t1,
-                title: "Urban Shoes Good",
-                review: "12",
-                price: "100",
-                oldPrice: "200",
-              },
-              {
-                image: t1,
-                title: "Urban Shoes Good",
-                review: "12",
-                price: "100",
-                oldPrice: "200",
-              },
-              {
-                image: t1,
-                title: "Urban Shoes Good",
-                review: "12",
-                price: "100",
-                oldPrice: "200",
-              },
-              {
-                image: t1,
-                title: "Urban Shoes Good",
-                review: "12",
-                price: "100",
-                oldPrice: "200",
-              },
-            ]}
+            ProductItem={retailerProductList?.data}
           />
         )}
         {tabValue === "royalView" && (
