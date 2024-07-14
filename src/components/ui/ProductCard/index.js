@@ -15,11 +15,7 @@ export function ProductCard({ productdetail }) {
               <div className="relative">
                 {productdetail?.main_image ? (
                   <img
-                    src={
-                      productdetail?.main_image
-                        ? `https://www.api.tredella.com/public/${productdetail?.main_image}`
-                        : require("../../../../public/images/no_image.png")
-                    }
+                    src={`https://www.api.tredella.com/public/${productdetail?.main_image}`}
                     height="1000"
                     width="1000"
                     className="h-full w-full object-cover rounded-xl group-hover/card:shadow-xl"
@@ -36,8 +32,10 @@ export function ProductCard({ productdetail }) {
                 )}
               </div>
               <div className="px-2">
-                <h1 className="text-sm md:text-lg font-medium md:font-semibold">
-                  {productdetail?.product_name || "No Title"}
+                <h1 className="text-sm md:text-lg font-medium md:font-semibold capitalize">
+                  {productdetail?.product_name ||
+                    productdetail?.name ||
+                    "No Title"}
                 </h1>
                 <div className="flex items-center">
                   <Rate

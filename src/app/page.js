@@ -8,15 +8,24 @@ import ProductSlider from "@/components/Carousel/ProductSlider";
 import Category from "@/components/Carousel/Category";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRetailerProductList } from "@/redux";
+import { fetchRetailerProductList, fetchWholeSaleProductList } from "@/redux";
 
 export default function Home() {
   const [tabValue, setTabValue] = useState("retail");
   const dispatch = useDispatch();
-  const retailerProductList = useSelector((state) => state.retailerProductList);
+  const homeData = useSelector((state) => state.homeData);
   useEffect(() => {
-    dispatch(fetchRetailerProductList({}));
-  }, []);
+    if (tabValue === "retail") {
+      dispatch(fetchRetailerProductList({}));
+    }
+    if (tabValue === "wholeSale") {
+      dispatch(fetchWholeSaleProductList({}));
+    }
+  }, [tabValue?.length]);
+  console.log(
+    "======retailerProductList",
+    homeData?.data?.product_main_categories
+  );
   return (
     <>
       <div className="bg-primary py-4 hidden lg:block ">
@@ -52,97 +61,27 @@ export default function Home() {
                 { image: t2 },
               ]}
             />
-            <Category />
+            <Category
+              categoriesData={homeData?.data?.product_main_categories}
+            />
           </>
         )}
         {tabValue === "retail" && (
           <>
             <ProductSlider
               Heading={"Best Deals"}
-              ProductItem={[
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-              ]}
+              ProductItem={homeData?.data?.best_deals}
             />
             <ProductSlider
               Heading={"Brands"}
-              ProductItem={[
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-                {
-                  image: t1,
-                  title: "Urban Shoes Good",
-                  review: "12",
-                  price: "100",
-                  oldPrice: "200",
-                },
-              ]}
+              ProductItem={homeData?.data?.brands}
             />
           </>
         )}
         {(tabValue === "retail" || tabValue === "wholeSale") && (
           <ProductSlider
             Heading={"All Products"}
-            ProductItem={retailerProductList?.data}
+            ProductItem={homeData?.data?.products}
           />
         )}
         {tabValue === "royalView" && (

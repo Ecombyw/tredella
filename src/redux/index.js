@@ -5,9 +5,10 @@ import { generateReducer } from "./reducer";
 import { fetchDataThunk } from "./actions/fetchData";
 import generate from "./generate";
 
-export const fetchRetailerProductList = fetchDataThunk(
-  "retailerProductList",
-  "get_products/retail"
+export const fetchRetailerProductList = fetchDataThunk("homeData", "index");
+export const fetchWholeSaleProductList = fetchDataThunk(
+  "homeData",
+  "wholesale_index"
 );
 
 const persistConfig = {
@@ -21,10 +22,7 @@ const rootReducer = combineReducers({
   token: generateReducer("token").reducer,
   checkLanguage: generateReducer("checkLanguage").reducer,
   // ============= CURDS APIS =============== //
-  retailerProductList: generate(
-    "retailerProductList",
-    fetchRetailerProductList
-  ),
+  homeData: generate("homeData", fetchRetailerProductList),
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

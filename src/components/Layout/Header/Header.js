@@ -107,7 +107,7 @@ const Header = () => {
         <Container>
           <div className="flex justify-between flex-wrap lg:flex-nowrap gap-2 p-2 items-center">
             <GoogleTranslate />
-            <div className="flex gap-4 items-center mx-auto md:mx-0 ">
+            <div className="flex gap-4 items-center w-full justify-end">
               <div className="flex gap-2 items-center text-sm md:text-base lg:text-lg ">
                 <CiGlobe size={20} className="text-primary" />
                 <div className="flex items-center">
@@ -148,49 +148,15 @@ const Header = () => {
                 height={150}
               />
             </Link>
-            <DrawerMenu
-              width={250}
-              title={
-                <>
-                  <div className="p-1 rounded-md block lg:hidden text-white bg-primary">
-                    <TbCategoryMinus size={20} />
-                  </div>
-                </>
-              }
-              content={
-                <>
-                  <ul className="space-y-2">
-                    <li>
-                      <Link
-                        className="text-base font-semibold text-black hover:text-black"
-                        href={"/"}
-                      >
-                        Dinnig
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="text-base font-semibold text-black hover:text-black"
-                        href={"/"}
-                      >
-                        Bedrrom
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="text-base font-semibold text-black hover:text-black"
-                        href={"/"}
-                      >
-                        Kitchen
-                      </Link>
-                    </li>
-                  </ul>
-                </>
-              }
-            />
             <div
               onClick={() => setDrawerOpen(true)}
-              className="px-3 h-[43px] flex items-center justify-center bg-white border mr-[-10px] cursor-pointer"
+              className="p-1 rounded-md block lg:hidden text-white bg-primary"
+            >
+              <TbCategoryMinus size={20} />
+            </div>
+            <div
+              onClick={() => setDrawerOpen(true)}
+              className="px-3 h-[43px] lg:flex hidden items-center justify-center bg-white border mr-[-10px] cursor-pointer"
             >
               Categories
             </div>
