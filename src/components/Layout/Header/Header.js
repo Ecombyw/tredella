@@ -128,7 +128,7 @@ const Header = () => {
               </div>
               <div className="flex items-center gap-1 text-xs md:text-base lg:text-lg  hover:underline">
                 <FaSuitcase size={20} className="text-primary" />
-                <Link className="text-sm md:text-base" href={"/"}>
+                <Link className="text-sm md:text-base" target="_blank" href={"https://seller.tredella.com/signup"}>
                   Become a Seller
                 </Link>
               </div>

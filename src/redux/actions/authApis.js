@@ -10,20 +10,30 @@ export const authApi = async (
   apiName
 ) => {
   setLoader(true);
+  const csrfTokenMetaTag = document.querySelector('meta[name="csrf-token"]');
+  const csrfToken = csrfTokenMetaTag
+    ? csrfTokenMetaTag.getAttribute("content")
+    : null;
+
+  // Use the token only if it's available
+  const headers = {
+    "Content-Type": "application/json",
+    ...(csrfToken && { "X-CSRF-Token": csrfToken }),
+  };
+
   try {
     const response = await fetch(`${REACT_BACKEND_PATH}${apiName}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${234567890987654323456789098765434567890}`,
-      },
+      headers,
       body: JSON.stringify(data),
+      credentials: 'same-origin',
     });
     const responseData = await response.json();
     if (response.ok) {
+      console.log("======responseData", responseData);
       setLoader(false);
-      dispatch(setToken(responseData?.data?.accessToken));
-      dispatch(setLoginData(responseData.data));
+      // dispatch(setToken(responseData?.data?.accessToken));
+      // dispatch(setLoginData(responseData.data));
     }
     if (!response.ok) {
       const textMessage = responseData?.message || "";

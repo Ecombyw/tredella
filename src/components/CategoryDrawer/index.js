@@ -9,10 +9,18 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { RiCloseFill } from "react-icons/ri";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const CategoryDrawer = ({ drawerOpen, setDrawerOpen }) => {
   const [showCategory, setShowCategory] = useState(true);
   const [swiperRef, setSwiperRef] = useState(null);
+  const [selectCategoryId, setSelectCategoryId] = useState(null);
+
+  const currentTab = useSelector((state) => state.currentTab);
+  const mainCategoriesList = useSelector((state) => state.mainCategoriesList);
+  const subCategoriesList = useSelector((state) => state.subCategoriesList);
+  const childCategoriesList = useSelector((state) => state.childCategoriesList);
+
   const pauseAutoplay = () => {
     if (swiperRef && swiperRef.autoplay) {
       swiperRef.autoplay.stop();
@@ -86,11 +94,17 @@ const CategoryDrawer = ({ drawerOpen, setDrawerOpen }) => {
   ];
 
   const renderCategories = () => {
-    return category?.map((item ,index) => {
+    const mainCategories = mainCategoriesList?.data?.filter(
+      (item) => item?.type == (currentTab?.data || "retail")
+    );
+    return mainCategories?.map((item, index) => {
       return (
         <div
-        key={index}
-          onClick={() => setShowCategory(false)}
+          key={index}
+          onClick={() => {
+            setShowCategory(false);
+            setSelectCategoryId(item?.id);
+          }}
           className="flex items-center justify-between py-2 hover:bg-zinc-200 cursor-pointer px-2 rounded"
         >
           <p>{item?.name}</p>
@@ -101,10 +115,20 @@ const CategoryDrawer = ({ drawerOpen, setDrawerOpen }) => {
   };
 
   const renderSubCategories = () => {
-    const renderChildCategory = (childCategory) => {
-      return childCategory?.map((item, index) => {
+    const subCategories = subCategoriesList?.data?.filter(
+      (item) =>
+        item?.type == (currentTab?.data || "retail") &&
+        item?.main_category_id == selectCategoryId
+    );
+    const renderChildCategory = (id) => {
+      const childCategories = childCategoriesList?.data?.filter(
+        (item) =>
+          item?.type == (currentTab?.data || "retail") &&
+          item?.sub_category_id == id
+      );
+      return childCategories?.map((item, index) => {
         return (
-          <div key={index}  className="w-[100px] mb-2">
+          <div key={index} className="w-[100px] mb-2">
             <Image
               src={imageUrl}
               alt=""
@@ -115,12 +139,12 @@ const CategoryDrawer = ({ drawerOpen, setDrawerOpen }) => {
         );
       });
     };
-    return subCategory?.map((item, index) => {
+    return subCategories?.map((item, index) => {
       return (
         <div key={index} className=" overflow-x-auto">
           <p className="mb-3">{item?.name}</p>
           <div className="flex items-center gap-4">
-            {renderChildCategory(item?.childCategory)}
+            {renderChildCategory(item?.id)}
           </div>
         </div>
       );

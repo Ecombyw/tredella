@@ -9,7 +9,7 @@ export const fetchDataThunk = (name, api) => {
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${234567890987654323456789098765434567890}`,
+        // Authorization: `Bearer ${null}`, // Replace with actual token
       },
     });
 

@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <title>Tredella</title>
+        <meta name="csrf-token" content="your-csrf-token-here"/>
       </head>
       <body className={poppin.className}>
         <ConfigProvider theme={{ token: { colorPrimary: "#B30015" } }}>

@@ -8,50 +8,77 @@ import ProductSlider from "@/components/Carousel/ProductSlider";
 import Category from "@/components/Carousel/Category";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRetailerProductList, fetchWholeSaleProductList } from "@/redux";
+import {
+  fetchChildCategoryList,
+  fetchMainCategoryList,
+  fetchRetailerProductList,
+  fetchSubCategoryList,
+  fetchWholeSaleProductList,
+} from "@/redux";
+import { getReducer } from "@/redux/reducer";
 
 export default function Home() {
   const [tabValue, setTabValue] = useState("retail");
   const dispatch = useDispatch();
   const homeData = useSelector((state) => state.homeData);
+  const setCurrentTab = getReducer("currentTab");
+
   useEffect(() => {
     if (tabValue === "retail") {
       dispatch(fetchRetailerProductList({}));
     }
-    if (tabValue === "wholeSale") {
+    if (tabValue === "wholesale") {
       dispatch(fetchWholeSaleProductList({}));
     }
   }, [tabValue?.length]);
-  console.log(
-    "======retailerProductList",
-    homeData?.data?.product_main_categories
-  );
+
+  useEffect(() => {
+    dispatch(fetchMainCategoryList({}));
+    dispatch(fetchSubCategoryList({}));
+    dispatch(fetchChildCategoryList({}));
+  }, []);
+
   return (
     <>
       <div className="bg-primary py-4 hidden lg:block ">
         <ul className="flex justify-center gap-12 text-white">
           <li
-            className="cursor-pointer hover:underline"
-            onClick={() => setTabValue("retail")}
+            className={`cursor-pointer hover:underline ${
+              tabValue === "retail" ? "underline" : ""
+            }`}
+            onClick={() => {
+              setTabValue("retail");
+              dispatch(setCurrentTab("retail"));
+            }}
           >
             Retail
           </li>
           <li
-            className="cursor-pointer hover:underline"
-            onClick={() => setTabValue("wholeSale")}
+            className={`cursor-pointer hover:underline ${
+              tabValue === "wholesale" ? "underline" : ""
+            }`}
+            onClick={() => {
+              setTabValue("wholesale");
+              dispatch(setCurrentTab("wholesale"));
+            }}
           >
             Wholesale
           </li>
           <li
-            className="cursor-pointer hover:underline"
-            onClick={() => setTabValue("royalView")}
+            className={`cursor-pointer hover:underline ${
+              tabValue === "royalView" ? "underline" : ""
+            }`}
+            onClick={() => {
+              setTabValue("royalView");
+              dispatch(setCurrentTab("royalView"));
+            }}
           >
             Royal View
           </li>
         </ul>
       </div>
       <Container>
-        {(tabValue === "retail" || tabValue === "wholeSale") && (
+        {(tabValue === "retail" || tabValue === "wholesale") && (
           <>
             <MainSlider
               MainImage={[
@@ -78,7 +105,7 @@ export default function Home() {
             />
           </>
         )}
-        {(tabValue === "retail" || tabValue === "wholeSale") && (
+        {(tabValue === "retail" || tabValue === "wholesale") && (
           <ProductSlider
             Heading={"All Products"}
             ProductItem={homeData?.data?.products}
