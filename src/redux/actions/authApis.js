@@ -18,7 +18,7 @@ export const authApi = async (
   // Use the token only if it's available
   const headers = {
     "Content-Type": "application/json",
-    ...(csrfToken && { "X-CSRF-Token": csrfToken }),
+    "X-CSRF-TOKEN": csrfToken,
   };
 
   try {
@@ -26,7 +26,7 @@ export const authApi = async (
       method: "POST",
       headers,
       body: JSON.stringify(data),
-      credentials: 'same-origin',
+      credentials: "same-origin",
     });
     const responseData = await response.json();
     if (response.ok) {

@@ -97,7 +97,7 @@ const Page = () => {
                 Login
               </Button>
               <div className="flex items-center justify-center mt-4 gap-1">
-                <p>Don't have an account?</p>
+                <p>{`Don't have an account?`}</p>
                 <p
                   className="hover:underline cursor-pointer font-semibold"
                   onClick={() => router.push("/register")}
