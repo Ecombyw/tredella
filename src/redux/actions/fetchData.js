@@ -4,7 +4,7 @@ import { REACT_BACKEND_PATH } from "../config";
 export const fetchDataThunk = (name, api) => {
   return createAsyncThunk(name, async (params) => {
     const url = `${REACT_BACKEND_PATH}${api}${
-      params?.id ? `/${params?.id}` : "?"
+      params?.id ? `/${params?.id}` : ""
     }`;
     const response = await fetch(url, {
       headers: {

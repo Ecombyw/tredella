@@ -1,11 +1,22 @@
 "use client";
-import { Button, Card, Form, Input } from "antd";
+import { Button, Card, Col, Form, Input, Row } from "antd";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import logoImage from "../../../../public/images/logo.webp";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { getReducer } from "@/redux/reducer";
+import { authApi } from "@/redux/actions/authApis";
 const Page = () => {
+  const [loader, setLoader] = useState(false);
+  const dispatch = useDispatch();
   const router = useRouter();
+  const setLoginData = getReducer("userInfo");
+  const setToken = getReducer("token");
+
+  const onFinish = (data) => {
+    authApi(dispatch, data, setToken, setLoginData, setLoader, "buyer/signup");
+  };
   return (
     <div className="h-screen w-screen bg-[#FAFAFA] flex items-center justify-center">
       <Card className="md:w-[400px]">
@@ -21,41 +32,76 @@ const Page = () => {
           <p className="text-center font-normal">Enter Your Information</p>
         </div>
         <Form layout="vertical">
-          <Form.Item
-            label="Full Name"
-            name="fullName"
-            rules={[{ required: true, message: "Enter your full name" }]}
-            className="mb-2"
-          >
-            <Input placeholder="Enter Your Full Name" />
-          </Form.Item>
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: "Enter your username" }]}
-            className="mb-2"
-          >
-            <Input placeholder="Enter Your username" />
-          </Form.Item>
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              { required: true, message: "Enter your email" },
-              { type: "email", message: "Enter valid email" },
-            ]}
-            className="mb-2"
-          >
-            <Input placeholder="Enter Your Email" />
-          </Form.Item>
-          <Form.Item
-            label="Phone"
-            name="phoneNumber"
-            rules={[{ required: true, message: "Enter your phone" }]}
-            className="mb-2"
-          >
-            <Input placeholder="Enter Your Phone" />
-          </Form.Item>
+          <Row gutter={10}>
+            <Col xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label="First Name"
+                name="first_name"
+                rules={[{ required: true, message: "Enter your first name" }]}
+                className="mb-2"
+              >
+                <Input placeholder="Enter Your Full Name" />
+              </Form.Item>
+            </Col>
+            <Col xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label="Last Name"
+                name="last_name"
+                rules={[{ required: true, message: "Enter your last name" }]}
+                className="mb-2"
+              >
+                <Input placeholder="Enter Your Full Name" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={10}>
+            <Col xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  { required: true, message: "Enter your email" },
+                  { type: "email", message: "Enter valid email" },
+                ]}
+                className="mb-2"
+              >
+                <Input placeholder="Enter Your Email" />
+              </Form.Item>
+            </Col>
+            <Col xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label="Phone"
+                name="phoneNumber"
+                rules={[{ required: true, message: "Enter your phone" }]}
+                className="mb-2"
+              >
+                <Input placeholder="Enter Your Phone" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={10}>
+            <Col xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[{ required: true, message: "Enter your username" }]}
+                className="mb-2"
+              >
+                <Input placeholder="Enter Your username" />
+              </Form.Item>
+            </Col>
+            <Col xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label="Country"
+                name="country"
+                rules={[{ required: true, message: "Enter your country" }]}
+                className="mb-2"
+              >
+                <Input placeholder="Enter Your Country" />
+              </Form.Item>
+            </Col>
+          </Row>
+
           <Form.Item
             label="Password"
             name="password"

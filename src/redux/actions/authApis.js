@@ -15,6 +15,7 @@ export const authApi = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${234567890987654323456789098765434567890}`,
       },
       body: JSON.stringify(data),
     });
