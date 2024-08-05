@@ -10,18 +10,25 @@ export const authApi = async (
   apiName
 ) => {
   setLoader(true);
-  const csrfTokenMetaTag = document.querySelector('meta[name="csrf-token"]');
-  const csrfToken = csrfTokenMetaTag
-    ? csrfTokenMetaTag.getAttribute("content")
-    : null;
 
   // Use the token only if it's available
-  const headers = {
-    "Content-Type": "application/json",
-    "X-CSRF-TOKEN": csrfToken,
-  };
+  // const headers = {
+  //   "Content-Type": "application/json",
+  //   "X-CSRF-TOKEN": csrfToken,
+  // };
 
   try {
+    const responseToken = await fetch(
+      `https://www.api.tredella.com/csrf-token`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const responseTokenData = await responseToken.json();
+    console.log("====responseTokenData", responseTokenData);
+    return;
     const response = await fetch(`${REACT_BACKEND_PATH}${apiName}`, {
       method: "POST",
       headers,
