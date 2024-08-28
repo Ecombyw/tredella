@@ -1,76 +1,82 @@
 "use client";
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { TextField, Button, Box } from "@mui/material";
-import { loginFormValidation } from "@/configs/validation/yup-validation";
+import React, { useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { Box } from "@mui/material";
 import LoginFormFields from "./login-form-fields";
 import Link from "next/link";
 import SimpleButton from "@/components/common/buttons/simple-button";
 import theme from "@/configs/theme/theme";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginFormValidation } from "@/configs/validation/yup-validation";
+import { AuthLoginApiRequest } from "@/lib/redux/actions/auth";
+import { getReducer } from "@/lib/redux/reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const LoginFormControl = () => {
-  const initialValues = {
-    email: "",
-    password: "",
-  };
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    getValues,
+    setError,
+    reset,
+    formState = { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    mode: "onChange",
+    resolver: yupResolver(loginFormValidation),
+  });
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   // Form submission handler
-  const onSubmit = (values) => {
-    console.log("Form data", values);
+  const submitForm = async (values) => {
+    AuthLoginApiRequest(dispatch, values, setLoading, router);
+    reset();
   };
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={loginFormValidation}
-      onSubmit={onSubmit}
-    >
-      {({ errors, touched, isValid, dirty }) => (
-        <Form>
-          <LoginFormFields
-            dirty={dirty}
-            errors={errors}
-            isValid={isValid}
-            touched={touched}
-          />
-          <SimpleButton
-            text={"Login"}
-            type="submit"
-            fullWidth
-            loading={false}
-            disabled={!(dirty && isValid)}
-            disableElevation={false}
-            // icon={<FaAngleRight size={18} fontWeight={"400"} />}
-            sxProps={{
-              width: "100%",
-              height: "38px",
-              borderRadius: "4px",
-              //   border: `1px solid ${theme.palette.borderColor.main}`,
-              fontSize: "18px",
-              textTransform: "uppercase",
-              display: "flex",
-              gap: "8px",
-              backgroundColor: theme.palette.backgroundColor.primary,
-              color: theme.palette.textColor.white,
-            }}
-          />
-          <Box my={1} textAlign={"center"} gap={2}>
-            Don't have an Account ?
-            <Link
-              href="/register"
-              variant="body2"
-              style={{
-                paddingLeft: "2px",
-                color: theme.palette.textColor.primary,
-                textDecoration: "underline",
-              }}
-            >
-              Sign up
-            </Link>
-          </Box>
-        </Form>
-      )}
-    </Formik>
+    <form onSubmit={handleSubmit(submitForm)}>
+      <LoginFormFields
+        control={control}
+        setValue={setValue}
+        loading={loading}
+      />
+      <SimpleButton
+        text={"Login"}
+        fullWidth
+        disabled={!(formState.isDirty && formState.isValid)}
+        sxProps={{
+          width: "100%",
+          height: "38px",
+          borderRadius: "4px",
+          fontSize: "18px",
+          textTransform: "uppercase",
+          display: "flex",
+          gap: "8px",
+          backgroundColor: theme.palette.backgroundColor.primary,
+          color: theme.palette.textColor.white,
+        }}
+        loading={loading}
+      />
+      <Box my={1} textAlign={"center"} gap={2}>
+        Don't have an Account?
+        <Link
+          href="/register"
+          style={{
+            paddingLeft: "2px",
+            color: theme.palette.textColor.primary,
+            textDecoration: "underline",
+          }}
+        >
+          Sign up
+        </Link>
+      </Box>
+    </form>
   );
 };
 

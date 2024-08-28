@@ -1,68 +1,171 @@
+"use client";
 import theme from "@/configs/theme/theme";
 import {
   Avatar,
+  Box,
   Divider,
   IconButton,
   ListItemIcon,
   Menu,
   MenuItem,
-  Tooltip,
 } from "@mui/material";
 import React from "react";
-import { FaUser, FaUserPlus } from "react-icons/fa";
-import { RiLogoutCircleLine } from "react-icons/ri";
+import { FaUser } from "react-icons/fa6";
 
 const DropdownMenu = ({
-  icon,
-  sxProps,
-  menuArray = [],
-  tooltipTitle = "Profile",
+  ariaControlLabel = "account",
+  menuButton,
+  menuButtonIcon,
+  menuButtonSxProps,
+  menuDataArray = [
+    {
+      menuItem: "component",
+      component: <FaUser />,
+      handleOnClick: () => console.log("onClick"),
+      componentStyles: { border: "1px solid red" },
+    },
+    {
+      title: "Profile",
+      listItemIcon: <FaUser />,
+      handleOnClick: () => console.log("onClick"),
+      menuItemStyles: { border: "1px solid red" },
+    },
+    {
+      menuItem: "divider",
+    },
+  ],
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const renderMenuItem = (item, index) => {
+    const {
+      menuItem = "list-item",
+      listItemIcon,
+      listItemIconAvatar = false,
+      title = "",
+      handleOnClick = undefined,
+      menuItemStyles = {},
+      componentStyles = {},
+    } = item;
+
+    switch (menuItem) {
+      case "list-item":
+        return (
+          <MenuItem
+            key={index}
+            sx={{
+              mb: 1,
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              color: theme.palette.textColor.secondary,
+              fontWeight: "500",
+              fontSize: "16px",
+              lineHeight: "30px",
+              letterSpacing: "0.12px",
+              ...menuItemStyles,
+            }}
+            onClick={() => {
+              handleOnClick();
+              handleClose();
+            }}
+          >
+            <Box sx={{ width: "22px", display: "flex", alignItems: "center",justifyContent:"start" }}>
+              {listItemIconAvatar ? (
+                <Avatar
+                  sx={{
+                    width: 28,
+                    height: 28,
+                    border: `1px solid ${theme.palette.borderColor.primary}`,
+                    bgcolor: "white",
+                  }}
+                >
+                  {listItemIcon}
+                </Avatar>
+              ) : (
+                listItemIcon
+              )}
+            </Box>
+
+            {title}
+          </MenuItem>
+        );
+
+      case "component":
+        return (
+          <Box key={index} sx={{ ...componentStyles, pb: 1 }}>
+            {item?.component}
+          </Box>
+        );
+
+      case "divider":
+        return (
+          <Divider
+            key={index}
+            sx={{ ...componentStyles }}
+            variant="fullWidth"
+          />
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <IconButton
         onClick={handleClick}
         size="small"
-        sx={{
-          height: "40px",
-          width: "40px",
-          color: open
-            ? theme.palette.textColor.primary
-            : theme.palette.textColor.secondary,
-          "&:hover": {
-            color: theme.palette.textColor.primary,
-          },
-          backgroundColor: open && `${theme.palette.backgroundColor.main}`,
-          ...sxProps,
-        }}
-        aria-controls={open ? `${tooltipTitle}-menu` : undefined}
+        sx={{ ...menuButtonSxProps }}
+        aria-controls={open ? `${ariaControlLabel}-menu` : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
       >
-        {icon || <FaUser size={18} />}
+        {menuButton || (
+          <Avatar
+            variant="circular"
+            sx={{
+              width: 36,
+              height: 36,
+              backgroundColor: "transparent",
+            }}
+          >
+            {menuButtonIcon || (
+              <FaUser
+                color={
+                  open
+                    ? theme.palette.backgroundColor.primary
+                    : theme.palette.backgroundColor.secondary
+                }
+              />
+            )}
+          </Avatar>
+        )}
       </IconButton>
+
       <Menu
         anchorEl={anchorEl}
-        id={`${tooltipTitle}-menu`}
+        id={`${ariaControlLabel}-menu`}
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            minWidth: "280px",
-            padding: "0px 10px",
+            minWidth: "200px",
+            padding: "0px 12px ",
+            mt: 2.5,
             "& .MuiAvatar-root": {
               width: 32,
               height: 32,
@@ -81,30 +184,16 @@ const DropdownMenu = ({
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
+            "@media(min-width:768px)": {
+              padding: "0px 14px ",
+              width: "260px",
+            },
           },
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <FaUser size={18} />
-          </ListItemIcon>
-          Login
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <FaUserPlus size={22} />
-          </ListItemIcon>
-          Register
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <RiLogoutCircleLine size={22} />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+        {menuDataArray?.map(renderMenuItem)}
       </Menu>
     </>
   );

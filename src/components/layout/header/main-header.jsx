@@ -4,10 +4,19 @@ import NextImage from "@/components/common/next-image";
 import SecondaryHeading from "@/components/typography/secondary-heading";
 import theme from "@/configs/theme/theme";
 import { Badge, Box, styled } from "@mui/material";
-import { FaHeart, FaUser } from "react-icons/fa";
-import { IoMdCart } from "react-icons/io";
+import { FaHeart, FaUser, FaUserPlus } from "react-icons/fa";
+import { IoIosHelpCircleOutline, IoMdCart } from "react-icons/io";
 import MainLogo from "../../../../public/assets/images/main_logo.webp";
 import LayoutProvider from "../provider/layout-provider";
+import { useRouter } from "next/navigation";
+import { MdDashboard, MdOutlineDashboard } from "react-icons/md";
+import { TbListDetails } from "react-icons/tb";
+import { IoSettings, IoSettingsOutline } from "react-icons/io5";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { FiShoppingBag } from "react-icons/fi";
+import { Logout } from "@/lib/redux/actions/auth";
+import { useDispatch } from "react-redux";
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     right: -4,
@@ -19,15 +28,69 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const MainHeader = () => {
-  let user = null;
+const MainHeader = ({ user }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const authDropdownMenu = [
+    {
+      menuItem: "component",
+    },
+    {
+      title: "Login",
+      listItemIcon: <FaUser size={18} />,
+      handleOnClick: () => router.push("/login"),
+    },
+    {
+      title: "Register",
+      listItemIcon: <FaUserPlus size={22} />,
+      handleOnClick: () => router.push("/register"),
+    },
+  ];
+  const userDropdownMenu = [
+    {
+      menuItem: "component",
+      // component: <RenderUserDetails user={user} />,
+    },
+    {
+      title: "Dashboard",
+      listItemIcon: <MdOutlineDashboard size={22} />,
+      handleOnClick: () => router.push("/dashboard"),
+    },
+    {
+      title: "Profile",
+      listItemIcon: <TbListDetails size={22} />,
+      handleOnClick: () => router.push("/profile"),
+    },
+    {
+      title: "Track Order",
+      listItemIcon: <FiShoppingBag size={22} />,
+      handleOnClick: () => router.push("/profile"),
+    },
+
+    {
+      title: "Settings",
+      listItemIcon: <IoSettingsOutline size={22} />,
+      handleOnClick: () => router.push("/settings"),
+    },
+    {
+      title: "Help Center",
+      listItemIcon: <IoIosHelpCircleOutline size={22} />,
+      // handleOnClick: () => console.log("help"),
+    },
+    {
+      menuItem: "divider",
+    },
+    {
+      title: "Sign Out",
+      listItemIcon: <RiLogoutCircleLine size={22} />,
+      handleOnClick: () => Logout(dispatch, router),
+      menuItemStyles: {
+        color: `${theme.palette.textColor.primary} !important`,
+      },
+    },
+  ];
   return (
     <LayoutProvider
-      parentSxProps={
-        {
-          //  backgroundColor: theme.palette.backgroundColor.white
-        }
-      }
       childSxProps={{
         display: "flex",
         alignItems: "center",
@@ -96,7 +159,12 @@ const MainHeader = () => {
             pb: "4px",
           }}
         >
-          <DropdownMenu icon={<FaUser size={18} />} />
+          <DropdownMenu
+            icon={<FaUser size={18} />}
+            ariaControlLabel="profile"
+            menuDataArray={user ? userDropdownMenu : authDropdownMenu}
+          />
+          {/* {user && <SecondaryHeading heading={user?.first_name} />} */}
         </Box>
       </Box>
     </LayoutProvider>

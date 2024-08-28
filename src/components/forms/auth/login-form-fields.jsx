@@ -1,30 +1,33 @@
 "use client";
-import CustomTextField from "@/components/common/text-field";
+import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
-import Link from "next/link";
-import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import CustomTextField from "@/components/common/text-field";
+import Link from "next/link";
 
-const LoginFormFields = ({ errors, touched, isValid, dirty }) => {
-  const [showPassword, setShowPassword] = useState (false);
+const LoginFormFields = ({ control, loading }) => {
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <CustomTextField
+            control={control}
             name="email"
             label="Email"
-            error={touched.email && !!errors.email}
+            disabled={loading}
           />
         </Grid>
         <Grid item xs={12}>
           <CustomTextField
+            control={control}
             name="password"
             label="Password"
+            disabled={loading}
             type={showPassword ? "text" : "password"}
-            error={touched.password && !!errors.password}
             handleOnClick={handleClickShowPassword}
             endAdornmentIcon={
               showPassword ? (
@@ -32,12 +35,17 @@ const LoginFormFields = ({ errors, touched, isValid, dirty }) => {
               ) : (
                 <AiOutlineEye size={18} />
               )
-            } // Example icons
+            }
           />
         </Grid>
       </Grid>
       <Box my={1} textAlign={"end"}>
-        <Link href="/forgot-password" variant="body2" color="primary">
+        <Link
+          disabled={loading}
+          href="/forgot-password"
+          variant="body2"
+          color="primary"
+        >
           Forgot password?
         </Link>
       </Box>

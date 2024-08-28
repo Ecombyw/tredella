@@ -4,6 +4,7 @@ import { Box, Button, CircularProgress } from "@mui/material";
 
 const SimpleButton = ({
   text = "button",
+  type = "submit",
   startIcon,
   endIcon,
   icon,
@@ -46,6 +47,7 @@ const SimpleButton = ({
       )}
       {variant === "contained" && (
         <Button
+          type={type}
           variant={variant}
           onClick={onClick}
           loading={loading}
@@ -66,6 +68,7 @@ const SimpleButton = ({
             "&:hover": {
               color: theme.palette.textColor.primary,
               backgroundColor: theme.palette.backgroundColor.white,
+              border:`1px solid ${theme.palette.borderColor.primary}`
             },
             ...sxProps,
           }}

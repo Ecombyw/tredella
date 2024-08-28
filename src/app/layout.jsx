@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           <body
             style={{
               backgroundColor: "rgba(236, 240, 244, 1)",
-              padding:"0px !important"
+              padding: "0px !important",
             }}
           >
             <MainWrapper>{children}</MainWrapper>
