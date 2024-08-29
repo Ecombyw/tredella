@@ -4,9 +4,10 @@ import {
   REGISTER_ENDPOINT,
   RESET_PASSWORD_ENDPOINT,
   UPDATE_FORGOT_PASSWORD_ENDPOINT,
+  VERIFY_EMAIL_LINK_ENDPOINT,
   VERIFY_LINK_FORGOT_PASSWORD_ENDPOINT,
 } from "./end-points";
-import { post } from "../services/api.request";
+import { post, get } from "../services/api.request";
 
 const AuthService = {
   login: (data) => {
@@ -20,6 +21,9 @@ const AuthService = {
   },
   resetPassword: (data) => {
     return post(RESET_PASSWORD_ENDPOINT, data);
+  },
+  verifyEmailLink: (token) => {
+    return get(`${VERIFY_EMAIL_LINK_ENDPOINT}/${token}`);
   },
   verifyLink: (data) => {
     return post(VERIFY_LINK_FORGOT_PASSWORD_ENDPOINT, data);

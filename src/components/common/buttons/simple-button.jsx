@@ -8,7 +8,7 @@ const SimpleButton = ({
   startIcon,
   endIcon,
   icon,
-  onClick,
+  onClick = undefined,
   variant = "contained",
   disableRipple = false,
   sxProps,
@@ -23,26 +23,22 @@ const SimpleButton = ({
         <Button
           variant={variant}
           onClick={onClick}
-          loading={loading}
           disabled={disabled || loading}
           disableRipple={disableRipple}
-          startIcon={loading ? "spinner" : startIcon}
-          endIcon={loading ? "spinner" : endIcon}
+          startIcon={loading ? <CircularProgress size={18} /> : startIcon}
+          endIcon={loading ? <CircularProgress size={18} /> : endIcon}
           sx={{
-            // color: theme.palette.textColor.secondary,
-            // backgroundColor: theme.palette.backgroundColor.white,
             textTransform: "capitalize",
             fontSize: "1rem",
             letterSpacing: "0.8px",
             height: "42px",
             borderRadius: "8px",
-
             ...sxProps,
           }}
           disableElevation={true}
           disableTouchRipple={true}
         >
-          {text}
+          {loading ? <CircularProgress size={18} /> : text}
         </Button>
       )}
       {variant === "contained" && (
@@ -50,7 +46,6 @@ const SimpleButton = ({
           type={type}
           variant={variant}
           onClick={onClick}
-          loading={loading}
           disabled={disabled || loading}
           disableRipple={disableRipple}
           sx={{
@@ -68,14 +63,14 @@ const SimpleButton = ({
             "&:hover": {
               color: theme.palette.textColor.primary,
               backgroundColor: theme.palette.backgroundColor.white,
-              border:`1px solid ${theme.palette.borderColor.primary}`
+              border: `1px solid ${theme.palette.borderColor.primary}`,
             },
             ...sxProps,
           }}
           disableElevation={disableElevation}
           disableTouchRipple={disableTouchRipple}
         >
-          {loading && (
+          {loading ? (
             <Box
               sx={{
                 display: "flex",
@@ -88,8 +83,7 @@ const SimpleButton = ({
                 sx={{ color: `${theme.palette.textColor.disabled}` }}
               />
             </Box>
-          )}
-          {!loading && icon && (
+          ) : icon ? (
             <span
               style={{
                 display: "flex",
@@ -99,22 +93,20 @@ const SimpleButton = ({
             >
               {icon}
             </span>
+          ) : (
+            text
           )}
-          {text}
         </Button>
       )}
       {variant === "outlined" && (
         <Button
           variant={variant}
           onClick={onClick}
-          loading={loading}
           disabled={disabled || loading}
           disableRipple={disableRipple}
-          startIcon={loading ? "spinner" : startIcon}
-          endIcon={loading ? "spinner" : endIcon}
+          startIcon={loading ? <CircularProgress size={18} /> : startIcon}
+          endIcon={loading ? <CircularProgress size={18} /> : endIcon}
           sx={{
-            // color: theme.palette.textColor.white,
-            // backgroundColor: theme.palette.backgroundColor.white,
             textTransform: "capitalize",
             fontSize: "1rem",
             letterSpacing: "0.8px",
@@ -128,7 +120,7 @@ const SimpleButton = ({
           disableElevation={disableElevation}
           disableTouchRipple={disableTouchRipple}
         >
-          {text}
+          {loading ? <CircularProgress size={18} /> : text}
         </Button>
       )}
     </>

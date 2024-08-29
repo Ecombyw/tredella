@@ -39,7 +39,7 @@ export const get = async (url) => {
   console.log("url", url);
   try {
     const response = await Axios.get(url);
-    return response.data;
+    return response;
   } catch (error) {
     throw errorHandler(error);
   }

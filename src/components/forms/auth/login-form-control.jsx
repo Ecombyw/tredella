@@ -1,17 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import { useForm, FormProvider } from "react-hook-form";
-import { Box } from "@mui/material";
-import LoginFormFields from "./login-form-fields";
-import Link from "next/link";
 import SimpleButton from "@/components/common/buttons/simple-button";
 import theme from "@/configs/theme/theme";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { loginFormValidation } from "@/configs/validation/yup-validation";
-import { AuthLoginApiRequest } from "@/lib/redux/actions/auth";
-import { getReducer } from "@/lib/redux/reducer";
-import { useDispatch, useSelector } from "react-redux";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Box } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import LoginFormFields from "./login-form-fields";
+import { loginRequest } from "@/lib/redux/actions/auth";
+import { STATUSES } from "@/configs/constants/default-values";
 
 const LoginFormControl = () => {
   const {
@@ -30,13 +30,13 @@ const LoginFormControl = () => {
     mode: "onChange",
     resolver: yupResolver(loginFormValidation),
   });
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+  const { status } = useSelector((state) => state.auth);
 
   // Form submission handler
   const submitForm = async (values) => {
-    AuthLoginApiRequest(dispatch, values, setLoading, router);
+    dispatch(loginRequest({ values, router }));
     reset();
   };
   return (
@@ -44,7 +44,8 @@ const LoginFormControl = () => {
       <LoginFormFields
         control={control}
         setValue={setValue}
-        loading={loading}
+        errors={errors}
+        loading={status === STATUSES.LOADING}
       />
       <SimpleButton
         text={"Login"}
@@ -61,7 +62,7 @@ const LoginFormControl = () => {
           backgroundColor: theme.palette.backgroundColor.primary,
           color: theme.palette.textColor.white,
         }}
-        loading={loading}
+        loading={status === STATUSES.LOADING}
       />
       <Box my={1} textAlign={"center"} gap={2}>
         Don't have an Account?

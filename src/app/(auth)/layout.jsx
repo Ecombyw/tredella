@@ -1,17 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const RootLayout = ({ children }) => {
   const router = useRouter();
-  const { user } = useSelector((state) => state.userInfo);
-  console.log('RootLayout', user)
+  const { userData } = useSelector((state) => state.auth);
   useEffect(() => {
-    if (user) {
+    if (userData) {
       router.push("/");
     }
-  }, [user, router]);
+  }, [userData, router]);
   return children;
 };
 

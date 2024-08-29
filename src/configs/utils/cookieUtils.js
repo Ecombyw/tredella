@@ -14,4 +14,4 @@ const cookieUtils = {
   },
 };
 
-export default cookieUtils;
+export default cookieUtils; 

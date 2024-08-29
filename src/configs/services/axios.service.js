@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+// import { useLocalStorage } from "../hooks/useLocalStorage";
 import { baseURL } from "../api/end-points";
 import cookieUtils from "../utils/cookieUtils";
 
@@ -34,7 +34,7 @@ const onResponse = (response) => {
 };
 
 function OnResponseError(error) {
-  const { removeStorageItem } = useLocalStorage();
+  // const { removeStorageItem } = useLocalStorage();
   const statusCode = error?.response?.status;
 
   // if (statusCode === 401) {

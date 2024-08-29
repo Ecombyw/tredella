@@ -23,6 +23,7 @@ export const signUpFormValidation = Yup.object({
     .required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
   mobile_number: Yup.string().required("Phone Number is required"),
+  country: Yup.string().required("Country is required"),  // Add validation for the country field
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .required("Required"),

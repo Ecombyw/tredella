@@ -40,7 +40,7 @@ const Footer = () => {
   };
   return (
     <LayoutProvider childSxProps={{ py: 2 }}>
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           alignItems: "center",
@@ -49,7 +49,7 @@ const Footer = () => {
         }}
       >
         <NextImage src={MainLogo} height={80} width={240} />
-      </Box>
+      </Box> */}
       <Divider sx={{ mt: 1, mb: 2 }} />
       <Grid container spacing={2}>
         {/* Footer Content */}

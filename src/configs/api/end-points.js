@@ -13,10 +13,12 @@ export const BLOG_LIST_ENDPOINT = "blog-list";
 
 // Authentication Endpoints
 export const LOGIN_ENDPOINT = "buyer/login";
-export const REGISTER_ENDPOINT = "register";
+export const REGISTER_ENDPOINT = "buyer/signup";
 export const FORGOT_PASSWORD_ENDPOINT = "forgot-password";
 export const VERIFY_LINK_FORGOT_PASSWORD_ENDPOINT =
   "verify-link-forgot-password";
+export const VERIFY_EMAIL_LINK_ENDPOINT =
+  "buyer/verify_email";
 export const UPDATE_FORGOT_PASSWORD_ENDPOINT = "update-forgot-password";
 
 // Profile Endpoints

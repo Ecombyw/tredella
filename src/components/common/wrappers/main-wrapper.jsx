@@ -1,28 +1,25 @@
 "use client";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
-import { getReducer } from "@/lib/redux/reducer";
+import cookieUtils from "@/configs/utils/cookieUtils";
+import localStorageUtils from "@/configs/utils/localStorageUtils";
+import { resetUserDetails, setUserDetails } from "@/lib/redux/slice/authSlice";
+// import { getReducer } from "@/lib/redux/reducer";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const MainWrapper = ({ children }) => {
   const pathname = usePathname();
-  // const router = useRouter();
-  // const dispatch = useDispatch();
-  // const setUserInfo = getReducer("userInfo");
-
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.auth);
   const notShowingHeaderPath = ["/login", "/register", "/forgotPassword"];
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("user");
-  //   if (storedUser) {
-  //     // dispatch(JSON.parse(storedUser));
-  //     dispatch(setUserInfo(JSON.parse(storedUser)));
-
-  //   } else {
-  //     dispatch(setUserInfo(null));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!userData) {
+      dispatch(resetUserDetails(dispatch, router));
+    }
+  }, []);
   return (
     <>
       {!notShowingHeaderPath.includes(pathname) && <Header />}

@@ -7,11 +7,11 @@ import MainHeader from "./main-header";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { user } = useSelector((state) => state.userInfo);
+  const { userData } = useSelector((state) => state.auth);
   return (
     <>
       <TopHeader />
-      <MainHeader user={user} />
+      <MainHeader user={userData} />
       <LowerHeader />
     </>
   );
