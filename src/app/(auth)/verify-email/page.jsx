@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import MainLogo from "../../../../public/assets/images/main_logo.webp";
 
 const Page = () => {
-    const { userData_temp } = useSelector((state) => state.auth);
 
   return (
     <Box
@@ -40,10 +39,7 @@ const Page = () => {
           fontSize: "2rem",
         }}
       />
-      <PrimaryHeading
-        heading={`@email-${userData_temp?.email}`}
-        sxProps={{ color: theme.palette.textColor.paragraph }}
-      />
+     
     </Box>
   );
 };

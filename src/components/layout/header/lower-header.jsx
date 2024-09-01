@@ -70,6 +70,7 @@ const LowerHeader = () => {
                 }}>
                     <SimpleButton
                         text={"Become a Seller"}
+                        variant='contained'
                         icon={<FaAngleRight size={18} fontWeight={"400"} />}
                         sxProps={{ flexDirection: "row-reverse", borderRadius: "0px" }}
                     />

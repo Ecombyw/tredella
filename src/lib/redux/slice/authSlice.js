@@ -8,7 +8,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     userData: localStorageUtils.getItem("userData"),
-    userData_temp: localStorageUtils.getItem("userData_temp"),
     status: STATUSES.IDLE,
     error: null,
   },
@@ -18,10 +17,7 @@ const authSlice = createSlice({
       localStorageUtils.setItem("userData", action.payload.buyer);
       cookieUtils.setCookie("token", action.payload.token);
     },
-    setTempUserDetails: (state, action) => {
-      state.userData_temp = action.payload;
-      localStorageUtils.setItem("userData_temp", action.payload);
-    },
+
     setCompanyDetails: (state, action) => {
       state.userData["company"] = action.payload;
       // localStorage.setItem("userData", JSON.stringify(state.userData));
@@ -31,10 +27,7 @@ const authSlice = createSlice({
       cookieUtils.removeCookie("token");
       state.userData = null;
     },
-    clearUserDataTemp: (state) => {
-      localStorageUtils.removeItem("userData_temp");
-      state.userData = userData_temp;
-    },
+  
 
   },
   extraReducers: (builder) => {

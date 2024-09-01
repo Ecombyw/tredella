@@ -18,11 +18,10 @@ export default function VerifyEmail({ params }) {
   const { token = undefined } = params;
   const router = useRouter();
   const dispatch = useDispatch();
-  const { userData_temp, status } = useSelector((state) => state.auth);
-  console.log("userData_temp", userData_temp);
-  const verifyEmail = async (token, data) => {
+  const {  status } = useSelector((state) => state.auth);
+  const verifyEmail = async (token) => {
     try {
-      dispatch(Verify_email({ token, data, router }));
+      dispatch(Verify_email({ token, router }));
     } catch (error) {
       errorToast("Invalid or expired token.");
     }
@@ -64,7 +63,7 @@ export default function VerifyEmail({ params }) {
 
         <SimpleButton
           text="Verify Email"
-          onClick={() => verifyEmail(token, userData_temp)}
+          onClick={() => verifyEmail(token)}
           sxProps={{
             border: `1px solid ${theme.palette.borderColor.primary}`,
           }}

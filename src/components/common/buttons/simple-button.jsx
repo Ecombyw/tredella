@@ -55,6 +55,7 @@ const SimpleButton = ({
             fontSize: "1rem",
             height: "42px",
             borderRadius: "8px",
+            border: `1px solid ${theme.palette.borderColor.primary}`,
             display: "flex",
             alignItems: "center",
             padding: "12px 16px",
@@ -71,31 +72,35 @@ const SimpleButton = ({
           disableTouchRipple={disableTouchRipple}
         >
           {loading ? (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <CircularProgress
-                size={18}
-                sx={{ color: `${theme.palette.textColor.disabled}` }}
-              />
-            </Box>
-          ) : icon ? (
-            <span
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {icon}
-            </span>
-          ) : (
-            text
-          )}
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <CircularProgress
+        size={18}
+        sx={{ color: theme.palette.textColor.disabled }}
+      />
+    </Box>
+  ) : (
+   <>
+   {icon && (
+    <span
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {icon}
+    </span>
+  )}
+    {text}  
+  
+   </>
+  )}
         </Button>
       )}
       {variant === "outlined" && (

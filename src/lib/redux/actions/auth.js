@@ -111,33 +111,15 @@ export const SignUpRequest = createAsyncThunk(
 );
 export const Verify_email = createAsyncThunk(
   "auth/verify_email",
-  async ({ token, data, router }, { dispatch, rejectWithValue, getState }) => {
+  async ({ token, router }, { dispatch, rejectWithValue, getState }) => {
     try {
       // Make the API call to verify the email link
       const response = await AuthService.verifyEmailLink(token);
       if (response?.data?.status === "success") {
-        // Dispatch the login request with the necessary parameters
-        dispatch(
-          loginRequest({
-            values: {
-              email: data?.email,
-              password: data?.password,
-            },
-            router,
-            showMessage: false, // Avoid showing the toast twice
-          })
-        );
-
-        // Remove temporary data from local storage safely
-        localStorageUtils.removeItem("userData_temp");
-
-        // Instead of mutating the state directly, handle this in your reducer
-        // For example, you could dispatch an action like:
-        dispatch(clearUserDataTemp());
-
         successToast(
           response?.data?.message || "Account activated successfully"
         );
+        router.push("/login")
       } else {
         // Handle the error case where verification was not successful
         errorToast(response?.data?.message || "Failed to activate account");
