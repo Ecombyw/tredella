@@ -19,7 +19,7 @@ const MainWrapper = ({ children }) => {
     if (!userData) {
       dispatch(resetUserDetails(dispatch, router));
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
       {!notShowingHeaderPath.includes(pathname) && <Header />}

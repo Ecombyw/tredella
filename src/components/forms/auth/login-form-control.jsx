@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Box } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import LoginFormFields from "./login-form-fields";
@@ -21,7 +20,7 @@ const LoginFormControl = () => {
     getValues,
     setError,
     reset,
-    formState = { errors },
+    formState: { errors, isDirty, isValid },
   } = useForm({
     defaultValues: {
       email: "",
@@ -30,6 +29,7 @@ const LoginFormControl = () => {
     mode: "onChange",
     resolver: yupResolver(loginFormValidation),
   });
+
   const dispatch = useDispatch();
   const router = useRouter();
   const { status } = useSelector((state) => state.auth);
@@ -39,6 +39,7 @@ const LoginFormControl = () => {
     dispatch(loginRequest({ values, router }));
     reset();
   };
+
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       <LoginFormFields
@@ -50,7 +51,7 @@ const LoginFormControl = () => {
       <SimpleButton
         text={"Login"}
         fullWidth
-        disabled={!(formState.isDirty && formState.isValid)}
+        disabled={!(isDirty && isValid)}
         sxProps={{
           width: "100%",
           height: "38px",
@@ -65,8 +66,8 @@ const LoginFormControl = () => {
         loading={status === STATUSES.LOADING}
       />
       <Box my={1} textAlign={"center"} gap={2}>
-        Don't have an Account?
-        <Link
+      Don&apos;t have an Account?
+      <Link
           href="/register"
           style={{
             paddingLeft: "2px",
